@@ -3,6 +3,17 @@ from autor import *
 
 class TestAutor(TestCase):
 
+    def test_quando_ImprimeAutor_retorna_SemErro(self):
+        autor = Autor("Igor",'igor.nascimento@caelum.com.br', 400 * "I")
+        self.assertIsNotNone(str(autor))
+
+    def test_quando_3AutoresValidos_retorna_SemErro(self):   
+        lista_autores = []     
+        lista_autores.append(Autor('Igor','igor.nascimento@caelum.com.br','Estudante de Python e ML'))
+        lista_autores.append(Autor('Thiago','thiago@hotmail.com','Estudante de Java'))
+        lista_autores.append(Autor('Cassio','cassio@yahoo.org','Estudante de JavaScript'))
+        self.assertEqual(len(lista_autores),3)
+
     def test_quando_AutorValido_retorna_DataRegistroNaoNula(self):        
         autor = Autor("Igor",'igor.nascimento@caelum.com.br', 400 * "I")
         self.assertIsNotNone(autor.data_registro)
