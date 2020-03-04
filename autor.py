@@ -41,8 +41,7 @@ class Autor:
 
     @property
     def data_registro(self):
-        #formata data para padrao brasileiro
-        return f"{self.__data_registro.day}/{self.__data_registro.month}/{self.__data_registro.year}"
+        return self.__data_registro
     
     def __str__(self):
         #imprime classe formatada

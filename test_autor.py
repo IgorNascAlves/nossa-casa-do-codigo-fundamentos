@@ -7,7 +7,7 @@ class TestAutor(TestCase):
         autor = Autor("Igor",'igor.nascimento@caelum.com.br', 400 * "I")
         self.assertIsNotNone(str(autor))
 
-    def test_quando_3AutoresValidos_retorna_SemErro(self):   
+    def test_quando_CadastroDeMultiplosAutoresValidos_retorna_SemErro(self):   
         lista_autores = []     
         lista_autores.append(Autor('Igor','igor.nascimento@caelum.com.br','Estudante de Python e ML'))
         lista_autores.append(Autor('Thiago','thiago@hotmail.com','Estudante de Java'))
