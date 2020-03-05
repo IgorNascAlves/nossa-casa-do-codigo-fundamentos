@@ -43,6 +43,13 @@ class Autor:
     def data_registro(self):
         return self.__data_registro
     
+    @property
+    def email(self):
+        return self.__email
+    
     def __str__(self):
         #imprime classe formatada
         return f'Nome: {self.__nome}\nEmail: {self.__email}\nDescricao: {self.__descricao}\nData: {self.data_registro}\n'
+
+    def __eq__(self,autor):
+        return self.__email == autor.__email
