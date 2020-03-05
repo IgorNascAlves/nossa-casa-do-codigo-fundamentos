@@ -37,6 +37,14 @@ class TestAutor(TestCase):
     def test_quando_DescricaoNulo_retorna_Erro(self):
         with self.assertRaises(Exception):
             Autor("Igor",'igor.nascimento@caelum.com.br', None)
+    
+    def test_quando_DescricaoVazia_retorna_Erro(self):
+        with self.assertRaises(Exception):
+            Autor("Igor",'igor.nascimento@caelum.com.br', '')
+    
+    def test_quando_DescricaoVazia_retorna_Erro(self):
+        with self.assertRaises(Exception):
+            Autor("Igor",'igor.nascimento@caelum.com.br', ' ')
 
     def test_quando_DescricaoMaior400Car_retorna_Erro(self):
         with self.assertRaises(Exception):

@@ -12,7 +12,7 @@ class Autor:
     def __set_nome(self, nome):
         
         #Verifica se nome eh nulo, vazio ou em branco
-        if nome in (None, '', ' '):
+        if nome in (None, ' '):
             raise Exception("Nome nulo")
 
         self.__nome = nome
@@ -30,7 +30,7 @@ class Autor:
     def __set_descricao(self, descricao):
 
         #verifica se descricao esta em branco
-        if not descricao :
+        if descricao in (None, ' '):
             raise Exception("Descricao Nula")
 
         #verifica se descricao tem mais de 400 caracteres
