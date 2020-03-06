@@ -10,5 +10,5 @@ class ColecaoDeAutores:
         self.__lista.append(autor)
 
     @property
-    def num_de_autores(self):
-        return len(self.__lista)
+    def lista_de_autores(self):
+        return self.__lista[:]

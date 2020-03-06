@@ -52,4 +52,4 @@ class Autor:
         return f'Nome: {self.__nome}\nEmail: {self.__email}\nDescricao: {self.__descricao}\nData: {self.data_registro}\n'
 
     def __eq__(self,autor):
-        return self.__email == autor.__email
+        return self.email == autor.email
