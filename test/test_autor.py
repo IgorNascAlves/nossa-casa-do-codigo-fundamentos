@@ -1,5 +1,5 @@
 from unittest import TestCase
-from autor import *
+from src.autor import *
 
 class TestAutor(TestCase):
 
