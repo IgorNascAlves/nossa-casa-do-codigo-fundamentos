@@ -31,28 +31,6 @@ class TestColecaoAutor:
 
         assert len(colecao_de_autores.lista_de_autores) == 2
 
-    def test_quando_BuscaAutor_retorna_AutorBuscado(self, colecao_de_autores):
-        email = 'igor.nascimento@caelum.com.br'
-
-        autor1 = Autor('Igor Nascimento', email, 'Estudante de ML')
-
-        colecao_de_autores.incluir(autor1)
-
-        autor2 = colecao_de_autores.busca_por_email(email)
-
-        assert autor1 == autor2
-
-    def test_quando_BuscaAutorInvalido_retorna_Exceção(self, colecao_de_autores):
-        email = 'igor_flipe@hotmail.com.br'
-
-        autor1 = Autor('Igor', 'igor.nascimento@caelum.com.br',
-                       'Estudante de ML')
-
-        colecao_de_autores.incluir(autor1)
-
-        with pytest.raises(Exception):
-            colecao_de_autores.busca_por_email(email)
-
     def test_quando_AcessaListaDaColecaoDeAutores_retorna_ListaComOsAutoresInseridos(self, colecao_de_autores):
         lista_autores_entrada = []
 
