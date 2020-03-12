@@ -8,7 +8,7 @@ class ColecaoDeAutores:
         if autor in self.__lista:
             raise Exception("Autor com mesmo email")    
         self.__lista.append(autor)
-
+        
     @property
     def lista_de_autores(self):
         return self.__lista[:]
