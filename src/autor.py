@@ -49,7 +49,8 @@ class Autor:
     
     def __str__(self):
         #imprime classe formatada
-        return f'Nome: {self.__nome}\nEmail: {self.__email}\nDescricao: {self.__descricao}\nData: {self.data_registro}\n'
+        #return f'Nome: {self.__nome}\nEmail: {self.__email}\nDescricao: {self.__descricao}\nData: {self.data_registro}\n'
+        return 'Nome: {}\nEmail: {}\nDescricao: {}\nData: {}\n'.format(self.__nome, self.__email, self.__descricao, self.data_registro)
 
     def __eq__(self,autor):
         return self.email == autor.email
