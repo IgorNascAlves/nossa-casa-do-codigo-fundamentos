@@ -8,7 +8,7 @@ class Categoria:
         self.__nome = nome
     
     def __eq__(self,categoria):
-        return self.__set_nome == categoria.__set_nome
+        return self.__nome == categoria.__nome
 
     def __str___(self):
         return "Categoria: {}".format(self.nome)
