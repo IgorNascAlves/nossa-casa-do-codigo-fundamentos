@@ -9,6 +9,3 @@ class Categoria:
     
     def __eq__(self,categoria):
         return self.__nome == categoria.__nome
-
-    def __str___(self):
-        return "Categoria: {}".format(self.nome)

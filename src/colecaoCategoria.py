@@ -6,7 +6,7 @@ class ColecaoDeCategorias:
 
     def incluir(self,categoria: Categoria):
         if categoria in self.__lista:
-            raise Exception("Categoria com mesmo nome")    
+            raise Exception("Categoria com nome {} já exite na Coleção".format())    
         self.__lista.append(categoria)
         
     @property
