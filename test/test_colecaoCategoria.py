@@ -15,7 +15,7 @@ class TestColecaoCategoria(TestCase):
         colecao_categorias.incluir(categoria2)
         colecao_categorias.incluir(categoria3)
 
-        self.assertEqual(3,len(colecao_categorias.lista_de_autores))
+        self.assertEqual(3,len(colecao_categorias.lista_de_categorias))
 
     def test_quando_CriaCategoriasComMesmoNome_retorna_Erro(self):
         categoria1 = Categoria("Machine Learning")
