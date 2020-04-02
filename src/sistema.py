@@ -1,4 +1,4 @@
-from autor import *
+from src.autor import *
 
 lista_autores = []
 lista_autores.append(Autor('Igor','igor.nascimento@caelum.com.br','Estudante de Python e ML'))
