@@ -7,7 +7,7 @@ class Livro:
                 categoria):
         self._set_titulo(titulo)
         self._set_resumo(resumo)
-        self._sumario = sumario
+        self._set_sumario(sumario)
         self._set_preco(preco)
         self._set_num_paginas(num_paginas)
         self._set_isbn(isbn)
@@ -25,6 +25,11 @@ class Livro:
         if len(resumo) > 500:
             raise Exception('Resumo não pode ter mais de 500 caracteres')
         self.__resumo = resumo
+
+    def _set_sumario(self, sumario):
+        if sumario in [None, '', ' ']:
+            raise Exception("Sumario não pode ser nulo")
+        self.__sumario = sumario
 
     def _set_preco(self, preco):
         if preco in [None]:
@@ -54,16 +59,9 @@ class Livro:
         if categoria in [None]:
             raise Exception("categoria não pode ser Nulo")
         self.__categoria = categoria
-
-    def _cria_objeto_data(self, data):
-        padrao = '([0-9]{2})/([0-9]{2})/([0-9]{4})'
-        data = re.search(padrao, data)
-        dia, mes, ano = int(data.group(1)), int(data.group(2)), int(data.group(3))
-        data = date(day = dia, month = mes, year = ano)
-        
-        return data
     
-    def _data_valida(self, data):
-        data = self._cria_objeto_data(data)
+    def _data_valida(self, data_str):
+        #tranforma string no objeto da classe Date
+        data = datetime.strptime(data_str, '%d/%m/%Y').date()
         hoje = datetime.today().date()
         return data >= hoje

@@ -26,6 +26,15 @@ class TestLivro:
         colecao_de_autores['sumario'], colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
         colecao_de_autores['isbn'], colecao_de_autores['data'], colecao_de_autores['categoria'])
 
+    def test_quando_CriarLivroComSumarioNulo_dispara_Exception(self, colecao_de_autores):
+        sumario = None #Obrigatorio
+        
+        with pytest.raises(Exception):                
+            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'], sumario,
+             colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
+                        colecao_de_autores['isbn'], colecao_de_autores['data'],
+                         colecao_de_autores['categoria'])
+
     def test_quando_CriaLivroComTituloNulo_dispara_Exception(self, colecao_de_autores):
 
         titulo = None #Obrigatorio
