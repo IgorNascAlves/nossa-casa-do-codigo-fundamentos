@@ -14,20 +14,23 @@ class Livro:
         self._set_data(data)
         self._set_categoria(categoria)
 
+    def get_titulo(self):
+        return self.__titulo
+
     def _set_titulo(self, titulo):
-        if titulo in [None, '', ' ']:
+        if is_null_empty(titulo):
             raise Exception("Titulo não pode ser Nulo")
         self.__titulo = titulo
 
     def _set_resumo(self, resumo):
-        if resumo in [None, '', ' ']:
+        if is_null_empty(resumo):
             raise Exception("Resumo não pode ser Nulo")
         if len(resumo) > 500:
             raise Exception('Resumo não pode ter mais de 500 caracteres')
         self.__resumo = resumo
 
     def _set_sumario(self, sumario):
-        if sumario in [None, '', ' ']:
+        if is_null_empty(sumario):
             raise Exception("Sumario não pode ser nulo")
         self.__sumario = sumario
 
@@ -56,7 +59,7 @@ class Livro:
         self.__data = data
 
     def _set_categoria(self, categoria):
-        if categoria in [None]:
+        if is_null_empty(categoria):
             raise Exception("categoria não pode ser Nulo")
         self.__categoria = categoria
     
@@ -65,3 +68,9 @@ class Livro:
         data = datetime.strptime(data_str, '%d/%m/%Y').date()
         hoje = datetime.today().date()
         return data >= hoje
+    
+    def __eq__(self, livro):
+        return self.__titulo == livro.get_titulo()
+
+def is_null_empty(valor):
+    return valor in [None, '', ' ']
