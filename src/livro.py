@@ -17,6 +17,9 @@ class Livro:
     def get_titulo(self):
         return self.__titulo
 
+    def get_isbn(self):
+        return self.__isbn
+
     def _set_titulo(self, titulo):
         if is_null_empty(titulo):
             raise Exception("Titulo não pode ser Nulo")
@@ -70,7 +73,7 @@ class Livro:
         return data >= hoje
     
     def __eq__(self, livro):
-        return self.__titulo == livro.get_titulo()
+        return self.__titulo == livro.get_titulo() or self.__isbn == livro.get_isbn()
 
 def is_null_empty(valor):
     return valor in [None, '', ' ']

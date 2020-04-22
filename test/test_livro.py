@@ -22,7 +22,7 @@ class TestLivro:
 
     def test_quando_CriarLivro_NaoDispara_Exception(self, colecao_de_autores):
         
-        livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+        Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
         colecao_de_autores['sumario'], colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
         colecao_de_autores['isbn'], colecao_de_autores['data'], colecao_de_autores['categoria'])
 
@@ -30,7 +30,7 @@ class TestLivro:
         sumario = None #Obrigatorio
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'], sumario,
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'], sumario,
              colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
                         colecao_de_autores['isbn'], colecao_de_autores['data'],
                          colecao_de_autores['categoria'])
@@ -40,7 +40,7 @@ class TestLivro:
         titulo = None #Obrigatorio
         
         with pytest.raises(Exception):                
-            livro = Livro(titulo, colecao_de_autores['resumo'], colecao_de_autores['sumario'],
+            Livro(titulo, colecao_de_autores['resumo'], colecao_de_autores['sumario'],
              colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
                         colecao_de_autores['isbn'], colecao_de_autores['data'],
                          colecao_de_autores['categoria'])
@@ -50,7 +50,7 @@ class TestLivro:
         resumo = None #Obrigatorio
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], resumo,
+            Livro(colecao_de_autores['titulo'], resumo,
             colecao_de_autores['sumario'], colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
             colecao_de_autores['isbn'], colecao_de_autores['data'], colecao_de_autores['categoria'])
     
@@ -59,7 +59,7 @@ class TestLivro:
         resumo = 'M' * 501 #Até 500
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], resumo,
+            Livro(colecao_de_autores['titulo'], resumo,
             colecao_de_autores['sumario'], colecao_de_autores['preco'], colecao_de_autores['num_paginas'],
             colecao_de_autores['isbn'], colecao_de_autores['data'], colecao_de_autores['categoria'])
         
@@ -68,7 +68,7 @@ class TestLivro:
         preco = None #Obrigatorio
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
                         colecao_de_autores['sumario'], preco, colecao_de_autores['num_paginas'],
                         colecao_de_autores['isbn'], colecao_de_autores['data'],
                          colecao_de_autores['categoria'])
@@ -78,7 +78,7 @@ class TestLivro:
         preco = 19.99 #a partir de 20
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
                         colecao_de_autores['sumario'], preco, colecao_de_autores['num_paginas'],
                         colecao_de_autores['isbn'], colecao_de_autores['data'],
                          colecao_de_autores['categoria'])
@@ -88,7 +88,7 @@ class TestLivro:
         num_paginas = None #Obrigatorio
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
                         colecao_de_autores['sumario'], colecao_de_autores['preco'],
                         num_paginas, colecao_de_autores['isbn'], 
                         colecao_de_autores['data'], colecao_de_autores['categoria'])
@@ -98,7 +98,7 @@ class TestLivro:
         num_paginas = 99 #a partir de 100
         
         with pytest.raises(Exception):                
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
                         colecao_de_autores['sumario'], colecao_de_autores['preco'],
                         num_paginas, colecao_de_autores['isbn'], 
                         colecao_de_autores['data'], colecao_de_autores['categoria'])
@@ -108,7 +108,7 @@ class TestLivro:
         isbn = None #obrigatorio
 
         with pytest.raises(Exception):
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
              colecao_de_autores['sumario'], colecao_de_autores['preco'],  colecao_de_autores['num_paginas'],
              isbn,  colecao_de_autores['data'], colecao_de_autores['categoria'])
 
@@ -116,7 +116,7 @@ class TestLivro:
         
         isbn = '978-3-16-148410-0' #formato livre
 
-        livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+        Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
         colecao_de_autores['sumario'], colecao_de_autores['preco'],  colecao_de_autores['num_paginas'],
         isbn,  colecao_de_autores['data'], colecao_de_autores['categoria'])
 
@@ -124,7 +124,7 @@ class TestLivro:
     
         isbn = '9783161484100' #formato livre
 
-        livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+        Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
             colecao_de_autores['sumario'], colecao_de_autores['preco'],  colecao_de_autores['num_paginas'],
             isbn,  colecao_de_autores['data'], colecao_de_autores['categoria'])
     
@@ -134,7 +134,7 @@ class TestLivro:
         data =  ontem.strftime('%d/%m/%Y')#futuro
 
         with pytest.raises(Exception):
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
                 colecao_de_autores['sumario'], colecao_de_autores['preco'],  colecao_de_autores['num_paginas'],
                 colecao_de_autores['isbn'], data, colecao_de_autores['categoria'])
 
@@ -143,7 +143,7 @@ class TestLivro:
         categoria = None #nao nula
 
         with pytest.raises(Exception):
-            livro = Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
+            Livro(colecao_de_autores['titulo'], colecao_de_autores['resumo'],
              colecao_de_autores['sumario'], colecao_de_autores['preco'],  colecao_de_autores['num_paginas'],
              colecao_de_autores['isbn'],  colecao_de_autores['data'], categoria)
     

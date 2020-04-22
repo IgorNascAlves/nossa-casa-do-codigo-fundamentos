@@ -1,14 +1,11 @@
-from src.livro import *
-from src.colecaoLivro import *
+from src.livro import Livro
+from src.colecaoLivro import ColecaoDeLivro
 from datetime import datetime, timedelta
 import pytest
 
-# Um livro pertence a uma categoria
-# Título é único
-# Isbn é único
-# Como não vamos trabalhar com bancos de dados,
-# precisamos usar alguma abstração que nos permita armazenar objetos.
-# Sugiro utilizar a mesma tática trabalhada para o autor.
+#OK Título é único
+#OK Isbn é único
+#OK Como não vamos trabalhar com bancos de dados, precisamos usar alguma abstração que nos permita armazenar objetos. Sugiro utilizar a mesma tática trabalhada para o autor.
 
 class TestColecaoLivro:
     @pytest.fixture
@@ -45,3 +42,4 @@ class TestColecaoLivro:
         colecao_de_livro.incluir(livro1)
         with pytest.raises(Exception):
             colecao_de_livro.incluir(livro2)
+
