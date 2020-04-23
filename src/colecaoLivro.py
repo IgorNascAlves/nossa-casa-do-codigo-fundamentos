@@ -6,7 +6,7 @@ class ColecaoDeLivro:
         
     def incluir(self, livro: Livro):
         if livro in self.__lista:
-            raise Exception("Livro com mesmo titulo ja existe")
+            raise Exception("Colecao de livro já contem um livro com mesmo titulo ou isbn")
         self.__lista.append(livro)
     
     @property
