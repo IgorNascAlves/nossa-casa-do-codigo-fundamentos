@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from src.validation_utils import *
 import re
 class Livro:
     
@@ -38,26 +39,26 @@ class Livro:
         self.__sumario = sumario
 
     def _set_preco(self, preco):
-        if preco in [None]:
+        if is_null_empty(preco):
             raise Exception("preco não pode ser Nulo")
         if preco < 20:
             raise Exception("Preço não pode ser inferior a 20 reias")
         self.__preco = preco
 
     def _set_num_paginas(self, num_paginas):
-        if num_paginas in [None]:
+        if is_null_empty(num_paginas):
             raise Exception("Numera de pagina não pode ser Nulo")
         if num_paginas < 100:
             raise Exception("Numero de pagina não pode ser inferior a 100")
         self.__num_paginas = num_paginas
 
     def _set_isbn(self, isbn):
-        if isbn in [None]:
+        if is_null_empty(isbn):
             raise Exception("isbn não pode ser Nulo")
         self.__isbn = isbn
 
     def _set_data(self, data):
-        if not self._data_valida(data):
+        if not valida_se_data_futura(data):
             raise Exception("Data deve ser futura {}".format(data))
         self.__data = data
 
@@ -66,14 +67,9 @@ class Livro:
             raise Exception("categoria não pode ser Nulo")
         self.__categoria = categoria
     
-    def _data_valida(self, data_str):
-        #tranforma string no objeto da classe Date
-        data = datetime.strptime(data_str, '%d/%m/%Y').date()
-        hoje = datetime.today().date()
-        return data >= hoje
+
     
     def __eq__(self, livro):
         return self.__titulo == livro.get_titulo() or self.__isbn == livro.get_isbn()
 
-def is_null_empty(valor):
-    return valor in [None, '', ' ']
+

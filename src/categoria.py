@@ -1,3 +1,4 @@
+from src.validation_utils import is_null_empty
 class Categoria:
     def __init__(self, nome):
         self.__set_nome(nome)
@@ -7,7 +8,7 @@ class Categoria:
         return self.__nome
         
     def __set_nome(self,nome):
-        if nome in (None, ' '):
+        if is_null_empty(nome):
             raise Exception("Nome nulo")
         self.__nome = nome
     

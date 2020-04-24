@@ -1,4 +1,5 @@
 from datetime import date
+from src.validation_utils import is_null_empty
 import re
 
 class Autor:
@@ -12,14 +13,14 @@ class Autor:
     def __set_nome(self, nome):
         
         #Verifica se nome eh nulo, vazio ou em branco
-        if nome in (None, ' '):
+        if is_null_empty(nome):
             raise Exception("Nome nulo")
 
         self.__nome = nome
 
     def __set_email(self, email):
         
-        regex = '^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$'
+        regex = r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         
         #verifica se email eh valido
         if not re.search(regex,email):
@@ -30,7 +31,7 @@ class Autor:
     def __set_descricao(self, descricao):
 
         #verifica se descricao esta em branco
-        if descricao in (None, ' '):
+        if is_null_empty(descricao):
             raise Exception("Descricao Nula")
 
         #verifica se descricao tem mais de 400 caracteres
