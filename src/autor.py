@@ -1,5 +1,5 @@
 from datetime import date
-from src.validation_utils import is_null_empty
+from src.validation_utils import eh_nulo_ou_vazio
 import re
 
 class Autor:
@@ -13,7 +13,7 @@ class Autor:
     def __set_nome(self, nome):
         
         #Verifica se nome eh nulo, vazio ou em branco
-        if is_null_empty(nome):
+        if eh_nulo_ou_vazio(nome):
             raise Exception("Nome nulo")
 
         self.__nome = nome
@@ -31,7 +31,7 @@ class Autor:
     def __set_descricao(self, descricao):
 
         #verifica se descricao esta em branco
-        if is_null_empty(descricao):
+        if eh_nulo_ou_vazio(descricao):
             raise Exception("Descricao Nula")
 
         #verifica se descricao tem mais de 400 caracteres

@@ -1,7 +1,7 @@
 from datetime import datetime, date
 
 
-def is_null_empty(valor):
+def eh_nulo_ou_vazio(valor):
     return valor in [None, '', ' ']
 
 def valida_se_data_futura(data_str):
