@@ -1,11 +1,13 @@
 from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
-from datetime import datetime, timedelta
+from datetime import datetime
 import pytest
+# OK Título é único
+# OK Isbn é único
+# OK Como não vamos trabalhar com bancos de dados,
+# precisamos usar alguma abstração que nos permita armazenar objetos.
+# Sugiro utilizar a mesma tática trabalhada para o autor.
 
-#OK Título é único
-#OK Isbn é único
-#OK Como não vamos trabalhar com bancos de dados, precisamos usar alguma abstração que nos permita armazenar objetos. Sugiro utilizar a mesma tática trabalhada para o autor.
 
 class TestColecaoLivro:
     @pytest.fixture
@@ -16,30 +18,41 @@ class TestColecaoLivro:
     def hoje_em_string(self):
         return datetime.today().date().strftime('%d/%m/%Y')
 
-    def test_quando_CriarMultiplosLivros_NaoDisparaException(self, colecao_de_livro, hoje_em_string):
-        livro1 =  Livro("Machine Learning em COBOL", 'M'*500, '<br> **** \n <html>'*50,
-        50.20, 150, '978-3-16-148410-0', hoje_em_string, 'Machine Learning')
-        livro2 =  Livro("Data Science em COBOL", 'M'*500, '<br> **** \n <html>'*50,
-        50.20, 150, '123-3-16-148410-0', hoje_em_string, 'Data Science')
-        livro3 =  Livro("Mobile em COBOL", 'M'*500, '<br> **** \n <html>'*50,
-        50.20, 150, '456-3-16-148410-0', hoje_em_string, 'Mobile')
-        
+    def test_quando_CriarMultiplosLivros_NaoDisparaException(self,
+                                                             colecao_de_livro,
+                                                             hoje_em_string):
+        livro1 = Livro("Machine Learning em COBOL",
+                       'M'*500, '<br> **** \n <html>'*50,
+                       50.20, 150, '978-3-16-148410-0',
+                       hoje_em_string, 'Machine Learning')
+        livro2 = Livro("Data Science em COBOL",
+                       'M'*500, '<br> **** \n <html>'*50,
+                       50.20, 150, '123-3-16-148410-0',
+                       hoje_em_string, 'Data Science')
+        livro3 = Livro("Mobile em COBOL",
+                       'M'*500, '<br> **** \n <html>'*50,
+                       50.20, 150, '456-3-16-148410-0',
+                       hoje_em_string, 'Mobile')
+
         colecao_de_livro.incluir(livro1)
         colecao_de_livro.incluir(livro2)
         colecao_de_livro.incluir(livro3)
 
         assert 3 == len(colecao_de_livro.lista)
 
-    def test_quando_CriarLivrosComTitulosIguais_DisparaException(self, colecao_de_livro, hoje_em_string):
+    def test_quando_CriarLivrosTitulosIguais_DisparaException(self,
+                                                              colecao_de_livro,
+                                                              hoje_em_string):
         titulo = "Machine Learning em COBOL"
-        
-        livro1 =  Livro(titulo, 'M'*500, '<br> **** \n <html>'*50,
-        50.20, 150, '978-3-16-148410-0', hoje_em_string, 'Machine Learning')
 
-        livro2 =  Livro(titulo, 'M'*500, '<br> **** \n <html>'*50,
-        50.20, 150, '753-3-16-148410-0', hoje_em_string, 'Machine Learning')
+        livro1 = Livro(titulo, 'M'*500, '<br> **** \n <html>'*50,
+                       50.20, 150, '978-3-16-148410-0',
+                       hoje_em_string, 'Machine Learning')
+
+        livro2 = Livro(titulo, 'M'*500, '<br> **** \n <html>'*50,
+                       50.20, 150, '753-3-16-148410-0',
+                       hoje_em_string, 'Machine Learning')
 
         colecao_de_livro.incluir(livro1)
         with pytest.raises(Exception):
             colecao_de_livro.incluir(livro2)
-

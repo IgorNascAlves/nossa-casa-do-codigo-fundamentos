@@ -2,3 +2,4 @@
 __pycache__
 igor_flipe
 igor_flipe.pub
+.mypy_cache
