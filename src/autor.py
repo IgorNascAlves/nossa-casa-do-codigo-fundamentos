@@ -5,27 +5,27 @@ import re
 
 class Autor:
 
-    def __init__(self, nome, email, descricao):
+    def __init__(self, nome: str, email: str, descricao: str):
         self.__set_nome(nome)
         self.__set_email(email)
         self.__set_descricao(descricao)
-        self.__data_registro = date.today()
+        self.__data_registro: date = date.today()
 
-    def __set_nome(self, nome):
+    def __set_nome(self, nome: str) -> None:
         # Verifica se nome eh nulo, vazio ou em branco
         if eh_nulo_ou_vazio(nome):
             raise Exception("Nome nulo")
 
-        self.__nome = nome
+        self.__nome: str = nome
 
-    def __set_email(self, email):
+    def __set_email(self, email: str) -> None:
         regex = r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
         # verifica se email eh valido
         if not re.search(regex, email):
             raise Exception("Email errado")
-        self.__email = email
+        self.__email: str = email
 
-    def __set_descricao(self, descricao):
+    def __set_descricao(self, descricao: str) -> None:
         # verifica se descricao esta em branco
         if eh_nulo_ou_vazio(descricao):
             raise Exception("Descricao Nula")
@@ -34,14 +34,14 @@ class Autor:
         if len(descricao) > 400:
             raise Exception("Descricao com mais de 400 car")
 
-        self.__descricao = descricao
+        self.__descricao: str = descricao
 
     @property
-    def data_registro(self):
+    def data_registro(self) -> date:
         return self.__data_registro
 
     @property
-    def email(self):
+    def email(self) -> str:
         return self.__email
 
     def __str__(self):
