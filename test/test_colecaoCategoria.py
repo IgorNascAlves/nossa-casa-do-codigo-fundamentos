@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from src.categoria import Categoria
 from src.colecaoCategoria import ColecaoDeCategorias
 

@@ -2,9 +2,10 @@ from src.validation_utils import eh_nulo_ou_vazio, valida_se_data_futura
 
 
 class Livro:
-    def __init__(self, titulo: str, resumo: str, sumario: str,
-                 preco: float, num_paginas: int, isbn: str, data: str,
-                 categoria: str):
+
+    def __init__(self, titulo, resumo, sumario,
+                 preco, num_paginas, isbn, data,
+                 categoria):
         self._set_titulo(titulo)
         self._set_resumo(resumo)
         self._set_sumario(sumario)
@@ -64,8 +65,9 @@ class Livro:
     def _set_categoria(self, categoria: str) -> None:
         if eh_nulo_ou_vazio(categoria):
             raise Exception("categoria não pode ser Nulo")
-        self.__categoria: str = categoria
+        self.__categoria = categoria
 
     def __eq__(self, livro):
-        return (self.__titulo == livro.get_titulo() or
-                self.__isbn == livro.get_isbn())
+        titulo_igual = self.__titulo == livro.get_titulo()
+        isbn_igual = self.__isbn == livro.get_isbn()
+        return titulo_igual or isbn_igual

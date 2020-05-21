@@ -8,12 +8,12 @@ class ColecaoDeCategorias:
     def __init__(self):
         self.__lista: List[Categoria] = []
 
-    def incluir(self, categoria: Categoria) -> None:
+    def incluir(self, categoria: Categoria):
         if categoria in self.__lista:
-            raise Exception("Categoria com nome {} já exite na Coleção".format(
-                categoria.nome))
+            msg = f"Categoria com nome {categoria.nome} já exite na Coleção"
+            raise Exception(msg)
         self.__lista.append(categoria)
 
     @property
-    def lista_de_categorias(self) -> List[Categoria]:
+    def lista_de_categorias(self):
         return self.__lista[:]

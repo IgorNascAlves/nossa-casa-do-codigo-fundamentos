@@ -6,13 +6,13 @@ class Categoria:
         self.__set_nome(nome)
 
     @property
-    def nome(self) -> str:
+    def nome(self):
         return self.__nome
 
-    def __set_nome(self, nome: str) -> None:
+    def __set_nome(self, nome):
         if eh_nulo_ou_vazio(nome):
             raise Exception("Nome nulo")
-        self.__nome: str = nome
+        self.__nome = nome
 
     def __eq__(self, categoria):
         return self.__nome == categoria.__nome
