@@ -1,6 +1,6 @@
 .vscode
-.__pycache__
 .mypy_cache
 igor_flipe
 igor_flipe.pub
 src\__pycache__
+__pycache__
