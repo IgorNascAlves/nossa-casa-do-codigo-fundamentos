@@ -1,6 +1,7 @@
 from typing import List
 
 from src.livro import Livro
+from src.validation_utils import eh_nulo_ou_vazio
 
 
 class ColecaoDeLivro:
@@ -16,3 +17,15 @@ class ColecaoDeLivro:
     @property
     def lista(self):
         return self.__lista.copy()
+
+    def busca_livro(self, titulo: str) -> List[Livro]:
+        resultado: List[Livro] = []
+        if eh_nulo_ou_vazio(titulo):
+            raise Exception(f"Titulo não pode ser nulo ou vazio")
+
+        for livro in self.lista:
+            if titulo in livro.get_titulo():
+                resultado.append(livro)
+        if len(resultado) == 0:
+            raise Exception(f"Livro com o titulo {titulo} não encontrado")
+        return resultado
