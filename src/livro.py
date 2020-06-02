@@ -21,6 +21,9 @@ class Livro:
     def get_isbn(self) -> str:
         return self.__isbn
 
+    def get_preco(self) -> float:
+        return self.__preco
+
     def _set_titulo(self, titulo: str) -> None:
         if eh_nulo_ou_vazio(titulo):
             raise Exception("Titulo não pode ser Nulo")
