@@ -32,9 +32,9 @@ class TestCarrinho:
 
         return colecao_de_livro
 
-    def test_quando_AddLivroCarrinho_NaoDisparaException(self,
-                                                         colecao_de_livro
-                                                         ):
+    def test_quando_AddLivroCarrinho_LivroNalista(self,
+                                                  colecao_de_livro
+                                                  ):
         carrinho = Carrinho()
 
         titulo = "Machine Learning em COBOL"
@@ -42,6 +42,8 @@ class TestCarrinho:
         livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
 
         carrinho.addLivro(livro_retornado)
+
+        assert titulo in carrinho.lista.keys()
 
     def test_quando_ListaLivroCarrinho_NaoDisparaException(self,
                                                            colecao_de_livro
@@ -91,3 +93,17 @@ class TestCarrinho:
 
         with pytest.raises(Exception):
             carrinho.addLivro(titulo)
+
+    def test_quando_AddMesmoLivroMultiplas_QuantidaAumenta(self,
+                                                           colecao_de_livro
+                                                           ):
+        carrinho = Carrinho()
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+        carrinho.addLivro(livro_retornado)
+
+        assert carrinho.lista[titulo][0] == 2
