@@ -12,10 +12,7 @@ class Carrinho:
         if not isinstance(livro, Livro):
             raise Exception("Nao eh objeto da classe Livro")
         self.__lista.append(livro)
-        self.soma_total(livro.get_preco())
-
-    def soma_total(self, novo_preco: float) -> None:
-        self.__total += novo_preco
+        self.__total += livro.get_preco()
 
     @property
     def lista(self) -> List[Livro]:
