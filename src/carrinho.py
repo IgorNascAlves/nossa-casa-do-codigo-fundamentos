@@ -17,7 +17,7 @@ class Carrinho:
             raise Exception("Nao eh objeto da classe Livro")
 
         quant_livro = self.__lista.get(livro.get_titulo(), (0, 0.0))[0]
-
+        #                           tupla (quantidade de livro, preço do livro)
         self.__lista[livro.get_titulo()] = (quant_livro + 1, livro.get_preco())
 
         self.__total += livro.get_preco()
