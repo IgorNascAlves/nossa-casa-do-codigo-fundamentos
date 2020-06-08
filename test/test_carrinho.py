@@ -43,7 +43,7 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-        assert titulo in carrinho.lista.keys()
+        assert livro_retornado in carrinho.lista.keys()
 
     def test_quando_ListaLivroCarrinho_ListaLivrosAumenta(self,
                                                           colecao_de_livro

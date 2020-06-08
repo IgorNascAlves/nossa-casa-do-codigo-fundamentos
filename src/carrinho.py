@@ -1,14 +1,16 @@
 from src.livro import Livro
 
-from typing import Dict, Tuple
+from collections import defaultdict
+from typing import Dict
 
 
-lista_livros = Dict[str, Tuple[int, float]]
+lista_livros = Dict[Livro, int]
 
 
 class Carrinho:
     def __init__(self):
-        self.__lista: lista_livros = {}
+
+        self.__lista: lista_livros = defaultdict(int)
         self.__total: float = 0.0
 
     def addLivro(self, livro: Livro) -> None:
@@ -16,9 +18,7 @@ class Carrinho:
         if not isinstance(livro, Livro):
             raise Exception("Nao eh objeto da classe Livro")
 
-        quant_livro = self.__lista.get(livro.get_titulo(), (0, 0.0))[0]
-        #                           tupla (quantidade de livro, preço do livro)
-        self.__lista[livro.get_titulo()] = (quant_livro + 1, livro.get_preco())
+        self.__lista[livro] = self.__lista[livro] + 1
 
         self.__total += livro.get_preco()
 

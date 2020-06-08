@@ -42,8 +42,10 @@ carrinho.addLivro(livro_retornado1)
 carrinho.addLivro(livro_retornado2)
 carrinho.addLivro(livro_retornado3)
 
-for titulo, detalhes in carrinho.lista.items():
-    print(f'Titulo: {titulo} Qtd: {detalhes[0]} Preco: {detalhes[1]}')
+for livro, qtd in carrinho.lista.items():
+    titulo = livro.get_titulo()
+    preco = livro.get_preco()
+    print(f'Titulo: {titulo} Qtd: {qtd} Preco: {preco}')
 
 r'''
 PS D:\Documentos\GitHub\nossa-casa-do-codigo-fundamentos> python .\sistema.py

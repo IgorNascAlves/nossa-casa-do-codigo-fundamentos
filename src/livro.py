@@ -74,3 +74,6 @@ class Livro:
         titulo_igual = self.__titulo == livro.get_titulo()
         isbn_igual = self.__isbn == livro.get_isbn()
         return titulo_igual or isbn_igual
+
+    def __hash__(self):
+        return hash(self.__titulo)
