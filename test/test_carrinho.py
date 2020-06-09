@@ -15,7 +15,7 @@ class TestCarrinho:
 
         livro1 = Livro("Machine Learning em COBOL",
                        'M'*500, '<br> **** \n <html>'*50,
-                       50.20, 150, '978-3-16-148410-0',
+                       30.20, 150, '978-3-16-148410-0',
                        hoje_em_string, 'Machine Learning')
         livro2 = Livro("Data Science em COBOL",
                        'M'*500, '<br> **** \n <html>'*50,
@@ -23,7 +23,7 @@ class TestCarrinho:
                        hoje_em_string, 'Data Science')
         livro3 = Livro("Mobile em COBOL",
                        'M'*500, '<br> **** \n <html>'*50,
-                       50.20, 150, '456-3-16-148410-0',
+                       55.20, 150, '456-3-16-148410-0',
                        hoje_em_string, 'Mobile')
 
         colecao_de_livro.incluir(livro1)
@@ -32,9 +32,9 @@ class TestCarrinho:
 
         return colecao_de_livro
 
-    def test_quando_AddLivroCarrinho_NaoDisparaException(self,
-                                                         colecao_de_livro
-                                                         ):
+    def test_quando_AddLivroCarrinho_LivroNalista(self,
+                                                  colecao_de_livro
+                                                  ):
         carrinho = Carrinho()
 
         titulo = "Machine Learning em COBOL"
@@ -43,9 +43,11 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-    def test_quando_ListaLivroCarrinho_NaoDisparaException(self,
-                                                           colecao_de_livro
-                                                           ):
+        assert livro_retornado in carrinho.lista.keys()
+
+    def test_quando_ListaLivroCarrinho_ListaLivrosAumenta(self,
+                                                          colecao_de_livro
+                                                          ):
         carrinho = Carrinho()
 
         titulo = "Machine Learning em COBOL"
@@ -60,9 +62,9 @@ class TestCarrinho:
 
         assert num_livros_adcionados == tamanho_lista
 
-    def test_quando_TotalCarrinho_NaoDisparaException(self,
-                                                      colecao_de_livro
-                                                      ):
+    def test_quando_TotalCarrinho_RetornaTotalEsperado(self,
+                                                       colecao_de_livro
+                                                       ):
         carrinho = Carrinho()
 
         titulo1 = "Machine Learning em COBOL"
@@ -91,3 +93,37 @@ class TestCarrinho:
 
         with pytest.raises(Exception):
             carrinho.addLivro(titulo)
+
+    def test_quando_AddMesmoLivroMultiplas_QuantidaAumenta(self,
+                                                           colecao_de_livro
+                                                           ):
+        carrinho = Carrinho()
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+        carrinho.addLivro(livro_retornado)
+        carrinho.addLivro(livro_retornado)
+
+        qtd_items_carrinho = len(carrinho.lista)
+
+        assert qtd_items_carrinho == 1
+
+    def test_quando_AddMesmoLivroMultiplas_TotalAumenta(self,
+                                                        colecao_de_livro
+                                                        ):
+        carrinho = Carrinho()
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        total_livros = livro_retornado.get_preco() * 3
+
+        carrinho.addLivro(livro_retornado)
+        carrinho.addLivro(livro_retornado)
+        carrinho.addLivro(livro_retornado)
+
+        assert carrinho.total == total_livros
