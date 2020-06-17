@@ -2,7 +2,7 @@ from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
 
 from datetime import datetime
-import pytest
+import pytest  # type: ignore
 # OK Título é único
 # OK Isbn é único
 # OK Como não vamos trabalhar com bancos de dados,
