@@ -1,7 +1,6 @@
 from datetime import date
-import re
 
-from src.validation_utils import eh_nulo_ou_vazio
+from src.validation_utils import eh_nulo_ou_vazio, valida_email
 
 
 class Autor:
@@ -22,14 +21,9 @@ class Autor:
 
     def __set_email(self, email):
 
-        regex = r"^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
-
-        # verifica se email eh valido
-        if not re.search(regex, email):
+        if not valida_email(email):
             raise Exception("Email errado")
         self.__email: str = email
-
-        self.__email = email
 
     def __set_descricao(self, descricao):
 
