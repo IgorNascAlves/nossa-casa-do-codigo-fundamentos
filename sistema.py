@@ -1,6 +1,7 @@
 from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
 from src.carrinho import Carrinho
+from src.cupons import Cupons
 
 from datetime import datetime
 
@@ -25,7 +26,7 @@ colecao_de_livro.incluir(livro1)
 colecao_de_livro.incluir(livro2)
 colecao_de_livro.incluir(livro3)
 
-carrinho = Carrinho()
+carrinho = Carrinho(Cupons())
 
 titulo1 = "Machine Learning em COBOL"
 titulo2 = "Data Science em COBOL"

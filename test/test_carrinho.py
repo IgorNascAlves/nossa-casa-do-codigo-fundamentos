@@ -2,6 +2,7 @@ from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
 from src.carrinho import Carrinho
 from src.cupons import Cupons
+from src.cupon import Cupon
 from src.cliente import Cliente
 
 from datetime import datetime
@@ -13,9 +14,9 @@ class TestCarrinho:
     @pytest.fixture
     def cupons(self):
         cupons = Cupons()
-        cupons.cadastra_cupom("Jovem Nerd",
-                              datetime.today().date().strftime('%d/%m/%Y'))
-        cupons.cadastra_cupom("Nerd Tech", "11/06/2020")
+        cupons.cadastra_cupom(Cupon("Jovem Nerd",
+                              datetime.today().date().strftime('%d/%m/%Y')))
+        cupons.cadastra_cupom(Cupon("Nerd Tech", "11/06/2020"))
         return cupons
 
     @pytest.fixture
