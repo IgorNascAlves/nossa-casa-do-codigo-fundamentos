@@ -2,6 +2,7 @@ from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
 from src.carrinho import Carrinho
 from src.cupons import Cupons
+from src.cliente import Cliente
 
 from datetime import datetime
 import pytest  # type: ignore
@@ -18,34 +19,16 @@ class TestCarrinho:
         return cupons
 
     @pytest.fixture
-    def email(self):
+    def cliente(self):
         email = 'igor.nascimento@caelum.com.br'
-        return email
-
-    @pytest.fixture
-    def CPF(self):
         CPF = '86297171068'
-        return CPF
-
-    @pytest.fixture
-    def endereco(self):
         endereco = 'Rua Alexandre Galantai n839 Bairro Dos Casa'
-        return endereco
-
-    @pytest.fixture
-    def complemento(self):
         complemento = 'casa'
-        return complemento
-
-    @pytest.fixture
-    def cidade(self):
         cidade = 'São Bernardo do Campo'
-        return cidade
-
-    @pytest.fixture
-    def estado(self):
         estado = 'SP'
-        return estado
+        return Cliente(email, CPF, endereco,
+                       complemento, cidade, estado
+                       )
 
     @pytest.fixture
     def colecao_de_livro(self):
@@ -169,11 +152,8 @@ class TestCarrinho:
 
     def test_qdo_FinalizaCompra_retornaID(self, cupons,
                                           colecao_de_livro,
-                                          email, CPF,
-                                          endereco,
-                                          complemento,
-                                          cidade,
-                                          estado):
+                                          cliente
+                                          ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -182,21 +162,14 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-        cod_compra = carrinho.finaliza_compra(email=email, CPF=CPF,
-                                              endereco=endereco,
-                                              complemento=complemento,
-                                              cidade=cidade, estado=estado
-                                              )
+        cod_compra = carrinho.finaliza_compra(cliente)
 
         assert cod_compra is not None
 
     def test_qdo_FinalizaCompraComCupom_retornaID(self, cupons,
                                                   colecao_de_livro,
-                                                  email, CPF,
-                                                  endereco,
-                                                  complemento,
-                                                  cidade,
-                                                  estado):
+                                                  cliente
+                                                  ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -207,10 +180,7 @@ class TestCarrinho:
 
         cupom = "Jovem Nerd"
 
-        cod_compra = carrinho.finaliza_compra(email=email, CPF=CPF,
-                                              endereco=endereco,
-                                              complemento=complemento,
-                                              cidade=cidade, estado=estado,
+        cod_compra = carrinho.finaliza_compra(cliente=cliente,
                                               cupom=cupom
                                               )
 
@@ -218,11 +188,8 @@ class TestCarrinho:
 
     def test_qdo_FinalizaCompraCupomVencido_DisparaException(self, cupons,
                                                              colecao_de_livro,
-                                                             email, CPF,
-                                                             endereco,
-                                                             complemento,
-                                                             cidade,
-                                                             estado):
+                                                             cliente
+                                                             ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -234,20 +201,14 @@ class TestCarrinho:
         cupom = "Nerd Tech"
 
         with pytest.raises(Exception):
-            carrinho.finaliza_compra(email=email, CPF=CPF,
-                                     endereco=endereco,
-                                     complemento=complemento,
-                                     cidade=cidade, estado=estado,
+            carrinho.finaliza_compra(cliente=cliente,
                                      cupom=cupom
                                      )
 
     def test_qdo_FinalizaCompraCupomInvalido_DisparaException(self, cupons,
                                                               colecao_de_livro,
-                                                              email, CPF,
-                                                              endereco,
-                                                              complemento,
-                                                              cidade,
-                                                              estado):
+                                                              cliente
+                                                              ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -259,20 +220,14 @@ class TestCarrinho:
         cupom = "Fake cupom"
 
         with pytest.raises(Exception):
-            carrinho.finaliza_compra(email=email, CPF=CPF,
-                                     endereco=endereco,
-                                     complemento=complemento,
-                                     cidade=cidade, estado=estado,
+            carrinho.finaliza_compra(cliente=cliente,
                                      cupom=cupom
                                      )
 
     def test_qdo_FinalizaCompraSemEmail_DisparaException(self, cupons,
                                                          colecao_de_livro,
-                                                         CPF,
-                                                         endereco,
-                                                         complemento,
-                                                         cidade,
-                                                         estado):
+                                                         cliente
+                                                         ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -281,22 +236,13 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-        email = " "
-
         with pytest.raises(Exception):
-            carrinho.finaliza_compra(email=email, CPF=CPF,
-                                     endereco=endereco,
-                                     complemento=complemento,
-                                     cidade=cidade, estado=estado
-                                     )
+            cliente.set_email(" ")
+            carrinho.finaliza_compra(cliente=cliente)
 
     def test_qdo_FinalizaCompraSemEndereco_DisparaException(self, cupons,
                                                             colecao_de_livro,
-                                                            email,
-                                                            CPF,
-                                                            complemento,
-                                                            cidade,
-                                                            estado):
+                                                            cliente):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -305,22 +251,14 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-        endereco = ' '
-
         with pytest.raises(Exception):
-            carrinho.finaliza_compra(email=email, CPF=CPF,
-                                     endereco=endereco,
-                                     complemento=complemento,
-                                     cidade=cidade, estado=estado
-                                     )
+            cliente.set_endereco(' ')
+            carrinho.finaliza_compra(cliente=cliente)
 
     def test_qdo_FinalizaCompraCPFInvalido_DisparaException(self, cupons,
                                                             colecao_de_livro,
-                                                            email,
-                                                            endereco,
-                                                            complemento,
-                                                            cidade,
-                                                            estado):
+                                                            cliente
+                                                            ):
         carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
@@ -329,11 +267,6 @@ class TestCarrinho:
 
         carrinho.addLivro(livro_retornado)
 
-        CPF = 46402623023  # CPF Invalido
-
         with pytest.raises(Exception):
-            carrinho.finaliza_compra(email=email, CPF=CPF,
-                                     endereco=endereco,
-                                     complemento=complemento,
-                                     cidade=cidade, estado=estado
-                                     )
+            cliente.set_CPF(46402623023)  # CPF Invalido
+            carrinho.finaliza_compra(cliente=cliente)

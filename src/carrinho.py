@@ -26,16 +26,12 @@ class Carrinho:
 
         self.__total += livro.get_preco()
 
-    def finaliza_compra(self, email: str, CPF: str, endereco: str,
-                        complemento: str, cidade: str,
-                        estado: str, cupom: str = None):
+    def finaliza_compra(self, cliente: Cliente, cupom: str = None) -> int:
 
         if cupom is not None:
             self.__cupons.valida_cupom(cupom)
 
-        self.cliente = Cliente(email, CPF, endereco,
-                               complemento, cidade, estado
-                               )
+        self.cliente = cliente
 
         return self.cod_atual
 
