@@ -1,6 +1,6 @@
 from src.autor import Autor
 from src.colecaoAutor import ColecaoDeAutores
-import pytest
+import pytest  # type: ignore
 
 
 class TestColecaoAutor:

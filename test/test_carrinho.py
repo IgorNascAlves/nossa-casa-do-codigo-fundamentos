@@ -1,12 +1,36 @@
 from src.livro import Livro
 from src.colecaoLivro import ColecaoDeLivro
 from src.carrinho import Carrinho
+from src.cupons import Cupons
+from src.cupon import Cupon
+from src.cliente import Cliente
 
 from datetime import datetime
-import pytest
+import pytest  # type: ignore
 
 
 class TestCarrinho:
+
+    @pytest.fixture
+    def cupons(self):
+        cupons = Cupons()
+        cupons.cadastra_cupom(Cupon("Jovem Nerd",
+                              datetime.today().date().strftime('%d/%m/%Y'),
+                              10.0))
+        cupons.cadastra_cupom(Cupon("Nerd Tech", "11/06/2020", 100.0))
+        return cupons
+
+    @pytest.fixture
+    def cliente(self):
+        email = 'igor.nascimento@caelum.com.br'
+        CPF = '86297171068'
+        endereco = 'Rua Alexandre Galantai n839 Bairro Dos Casa'
+        complemento = 'casa'
+        cidade = 'São Bernardo do Campo'
+        estado = 'SP'
+        return Cliente(email, CPF, endereco,
+                       complemento, cidade, estado
+                       )
 
     @pytest.fixture
     def colecao_de_livro(self):
@@ -32,10 +56,10 @@ class TestCarrinho:
 
         return colecao_de_livro
 
-    def test_quando_AddLivroCarrinho_LivroNalista(self,
-                                                  colecao_de_livro
-                                                  ):
-        carrinho = Carrinho()
+    def test_qdo_AddLivroCarrinho_LivroNalista(self, cupons,
+                                               colecao_de_livro
+                                               ):
+        carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
 
@@ -45,10 +69,10 @@ class TestCarrinho:
 
         assert livro_retornado in carrinho.lista.keys()
 
-    def test_quando_ListaLivroCarrinho_ListaLivrosAumenta(self,
-                                                          colecao_de_livro
-                                                          ):
-        carrinho = Carrinho()
+    def test_qdo_ListaLivroCarrinho_ListaLivrosAumenta(self, cupons,
+                                                       colecao_de_livro
+                                                       ):
+        carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
 
@@ -62,10 +86,10 @@ class TestCarrinho:
 
         assert num_livros_adcionados == tamanho_lista
 
-    def test_quando_TotalCarrinho_RetornaTotalEsperado(self,
-                                                       colecao_de_livro
-                                                       ):
-        carrinho = Carrinho()
+    def test_qdo_TotalCarrinho_RetornaTotalEsperado(self, cupons,
+                                                    colecao_de_livro
+                                                    ):
+        carrinho = Carrinho(cupons)
 
         titulo1 = "Machine Learning em COBOL"
         titulo2 = "Data Science em COBOL"
@@ -84,20 +108,20 @@ class TestCarrinho:
 
         assert total_carrinho_real == total_carrinho_retorno
 
-    def test_quando_AddLivroCarrinhoTitulo_DisparaException(self,
-                                                            colecao_de_livro
-                                                            ):
-        carrinho = Carrinho()
+    def test_qdo_AddLivroCarrinhoTitulo_DisparaException(self, cupons,
+                                                         colecao_de_livro
+                                                         ):
+        carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
 
         with pytest.raises(Exception):
             carrinho.addLivro(titulo)
 
-    def test_quando_AddMesmoLivroMultiplas_QuantidaAumenta(self,
-                                                           colecao_de_livro
-                                                           ):
-        carrinho = Carrinho()
+    def test_qdo_AddMesmoLivroMultiplas_QuantidaAumenta(self, cupons,
+                                                        colecao_de_livro
+                                                        ):
+        carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
 
@@ -111,10 +135,10 @@ class TestCarrinho:
 
         assert qtd_items_carrinho == 1
 
-    def test_quando_AddMesmoLivroMultiplas_TotalAumenta(self,
-                                                        colecao_de_livro
-                                                        ):
-        carrinho = Carrinho()
+    def test_qdo_AddMesmoLivroMultiplas_TotalAumenta(self, cupons,
+                                                     colecao_de_livro
+                                                     ):
+        carrinho = Carrinho(cupons)
 
         titulo = "Machine Learning em COBOL"
 
@@ -127,3 +151,124 @@ class TestCarrinho:
         carrinho.addLivro(livro_retornado)
 
         assert carrinho.total == total_livros
+
+    def test_qdo_FinalizaCompra_retornaID(self, cupons,
+                                          colecao_de_livro,
+                                          cliente
+                                          ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        cod_compra = carrinho.finaliza_compra(cliente)
+
+        assert cod_compra is not None
+
+    def test_qdo_FinalizaCompraComCupom_retornaID(self, cupons,
+                                                  colecao_de_livro,
+                                                  cliente
+                                                  ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        cupom = "Jovem Nerd"
+
+        cod_compra = carrinho.finaliza_compra(cliente=cliente,
+                                              cupom=cupom
+                                              )
+
+        assert cod_compra is not None
+
+    def test_qdo_FinalizaCompraCupomVencido_DisparaException(self, cupons,
+                                                             colecao_de_livro,
+                                                             cliente
+                                                             ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        cupom = "Nerd Tech"
+
+        with pytest.raises(Exception):
+            carrinho.finaliza_compra(cliente=cliente,
+                                     cupom=cupom
+                                     )
+
+    def test_qdo_FinalizaCompraCupomInvalido_DisparaException(self, cupons,
+                                                              colecao_de_livro,
+                                                              cliente
+                                                              ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        cupom = "Fake cupom"
+
+        with pytest.raises(Exception):
+            carrinho.finaliza_compra(cliente=cliente,
+                                     cupom=cupom
+                                     )
+
+    def test_qdo_FinalizaCompraSemEmail_DisparaException(self, cupons,
+                                                         colecao_de_livro,
+                                                         cliente
+                                                         ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        with pytest.raises(Exception):
+            cliente.set_email(" ")
+            carrinho.finaliza_compra(cliente=cliente)
+
+    def test_qdo_FinalizaCompraSemEndereco_DisparaException(self, cupons,
+                                                            colecao_de_livro,
+                                                            cliente):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        with pytest.raises(Exception):
+            cliente.set_endereco(' ')
+            carrinho.finaliza_compra(cliente=cliente)
+
+    def test_qdo_FinalizaCompraCPFInvalido_DisparaException(self, cupons,
+                                                            colecao_de_livro,
+                                                            cliente
+                                                            ):
+        carrinho = Carrinho(cupons)
+
+        titulo = "Machine Learning em COBOL"
+
+        livro_retornado = colecao_de_livro.busca_livro(titulo).pop()
+
+        carrinho.addLivro(livro_retornado)
+
+        with pytest.raises(Exception):
+            cliente.set_CPF(46402623023)  # CPF Invalido
+            carrinho.finaliza_compra(cliente=cliente)

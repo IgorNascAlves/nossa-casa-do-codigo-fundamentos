@@ -1,4 +1,4 @@
-import pytest
+import pytest  # type: ignore
 from datetime import datetime, timedelta
 from src.livro import Livro
 
