@@ -1,6 +1,5 @@
 from typing import List
 
-from src.validation_utils import valida_se_data_futura
 from src.cupon import Cupon
 
 
@@ -17,7 +16,5 @@ class Cupons:
             ind = self.__lista.index(nome)
         except ValueError:
             raise Exception("Cupom não cadastrado")
-        else:
-            data_cupom = self.__lista[ind].get_validade()
-        if not valida_se_data_futura(data_cupom):
+        if not self.__lista[ind].eh_valido():
             raise Exception("Cupom vencido")

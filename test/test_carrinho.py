@@ -15,8 +15,9 @@ class TestCarrinho:
     def cupons(self):
         cupons = Cupons()
         cupons.cadastra_cupom(Cupon("Jovem Nerd",
-                              datetime.today().date().strftime('%d/%m/%Y')))
-        cupons.cadastra_cupom(Cupon("Nerd Tech", "11/06/2020"))
+                              datetime.today().date().strftime('%d/%m/%Y'),
+                              10.0))
+        cupons.cadastra_cupom(Cupon("Nerd Tech", "11/06/2020", 100.0))
         return cupons
 
     @pytest.fixture
